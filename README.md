@@ -15,16 +15,6 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests (jest)
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests (cypress)
-```
-npm run test:e2e
-```
-
 ### Lints and fixes files
 ```
 npm run lint
