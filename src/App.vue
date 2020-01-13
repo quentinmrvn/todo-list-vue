@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="App">
     <Header/>
-    <router-view/>
+    <div class="Container">
+      <router-view/>
+    </div>
   </div>
 </template>
 <script>
@@ -13,4 +15,7 @@ export default {
 </script>
 <style lang="scss">
   @import '/scss/reset';
+  .Container {
+    padding: 1rem;
+  }
 </style>

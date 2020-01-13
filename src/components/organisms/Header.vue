@@ -16,11 +16,12 @@ export default {
 <style lang="scss">
   .Header {
     padding: 1rem;
+    background-color: $color-background;
     &-title {
-      color: $color-primary;
-      font-size: 3rem;
       display: flex;
       align-items: center;
+      font-size: 3rem;
+      color: $color-primary;
       &Logo {
         max-height: 5rem;
         animation: logo-rotate 2s infinite;
