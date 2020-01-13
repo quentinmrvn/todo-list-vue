@@ -1,5 +1,5 @@
 # todo-list-vue
-
+This a todo list made with Vue
 ## Project setup
 ```
 npm install
@@ -15,12 +15,12 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests
+### Run your unit tests (jest)
 ```
 npm run test:unit
 ```
 
-### Run your end-to-end tests
+### Run your end-to-end tests (cypress)
 ```
 npm run test:e2e
 ```
@@ -29,7 +29,4 @@ npm run test:e2e
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# todo-list-vue
+# quentinmrvn
