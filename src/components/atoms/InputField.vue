@@ -12,7 +12,6 @@
            @blur="onBlur"
            @focus="onFocus"
            :type="type"
-           v-model="inputValue"
            :placeholder="placeholder"
            :id="name"
            :name="name"
@@ -25,15 +24,19 @@
 <script>
 export default {
   name: 'InputField',
-  data: () => ({
-    inputValue: '',
-    reducedName: '',
-    isFocused: false,
-  }),
+  data() {
+    return {
+      isFocused: false,
+    };
+  },
   props: {
     label: {
       type: String,
       default: '',
+    },
+    value: {
+      type: String,
+      required: true,
     },
     name: {
       type: String,
@@ -60,8 +63,8 @@ export default {
     },
   },
   methods: {
-    emitInput() {
-      this.$emit('input', this.inputValue);
+    emitInput(event) {
+      this.$emit('input', event.target.value);
     },
     onBlur() {
       this.isFocused = false;
