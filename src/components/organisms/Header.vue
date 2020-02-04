@@ -1,7 +1,10 @@
 <template>
   <header class="Header">
     <h1 class="Header-title">
-      <img class="Header-titleLogo" src="../../assets/logo.png"/>
+      <img
+        class="Header-titleLogo"
+        src="../../assets/logo.png"
+      >
       Todo list
     </h1>
   </header>
