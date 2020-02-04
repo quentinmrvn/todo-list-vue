@@ -20,10 +20,12 @@ export default {
     animation: {
       type: String,
       default: '',
+      // zoom, pulse, shake, flip
     },
     color: {
       type: String,
       default: '#000',
+      // HEX or color name
     },
     height: {
       type: String,
