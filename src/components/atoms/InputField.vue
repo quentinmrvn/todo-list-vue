@@ -1,34 +1,35 @@
 <template>
-  <div class="InputField" :class="cssModifier">
+  <div
+    class="InputField"
+    :class="cssModifier"
+  >
     <label
-      :for="name"
+      v-if="label || $slots.label"
+      :for="internalInputId"
       class="InputField-label"
-      v-if="label"
     >
-      {{ label }}
+      <slot name="label">
+        {{ label }}
+      </slot>
     </label>
 
-    <input @input="emitInput"
-           @blur="onBlur"
-           @focus="onFocus"
-           :type="type"
-           :placeholder="placeholder"
-           :id="name"
-           :name="name"
-           :class="cssClasses"
-           class="InputField-input"
-    />
+    <input
+      :id="internalInputId"
+      :type="type"
+      :class="cssClasses"
+      class="InputField-input"
+      v-bind="$attrs"
+      @input="emitInput"
+      @blur="onBlur"
+      @focus="onFocus"
+    >
   </div>
 </template>
 
 <script>
 export default {
   name: 'InputField',
-  data() {
-    return {
-      isFocused: false,
-    };
-  },
+  inheritAttrs: false,
   props: {
     label: {
       type: String,
@@ -38,14 +39,6 @@ export default {
       type: String,
       required: true,
     },
-    name: {
-      type: String,
-      required: true,
-    },
-    placeholder: {
-      type: String,
-      default: '',
-    },
     type: {
       type: String,
       default: 'text',
@@ -54,12 +47,24 @@ export default {
       type: String,
       default: '',
     },
+    inputId: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      isFocused: false,
+    };
   },
   computed: {
     cssClasses() {
       return {
         'InputField-input--focused': this.isFocused,
       };
+    },
+    internalInputId() {
+      return this.inputId === '' ? this.uid : this.inputId;
     },
   },
   methods: {
