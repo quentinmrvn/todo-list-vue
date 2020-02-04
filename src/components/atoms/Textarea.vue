@@ -38,10 +38,6 @@ export default {
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-      default: 'text',
-    },
     cssModifier: {
       type: String,
       default: '',
