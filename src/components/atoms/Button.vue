@@ -5,17 +5,32 @@
     @click="emitClick"
   >
     {{ text }}
+
+    <Icon
+      v-if="iconName"
+      :name="iconName"
+      height="20"
+      width="20"
+      class="Button-icon"
+    />
   </button>
 </template>
 
 <script>
+import Icon from './Icon.vue';
+
 export default {
   name: 'Button',
+  components: { Icon },
   inheritAttrs: false,
   props: {
     text: {
       type: String,
       required: true,
+    },
+    iconName: {
+      type: String,
+      default: '',
     },
   },
   methods: {
@@ -28,6 +43,10 @@ export default {
 
 <style lang="scss">
     .Button {
+      $el: &;
+
+      display: flex;
+      align-items: center;
       padding: 1rem 2rem;
       border: none;
       border-radius: .5rem;
@@ -39,14 +58,27 @@ export default {
 
       &:hover {
         cursor: pointer;
-        background-color: $color-primary;
-        color: $color-secondary;
+
+
+        #{$el}-icon {
+          transform: rotate(20deg);
+        }
       }
 
       &[disabled] {
         opacity: .5;
         color: $color-primary;
         background-color: $color-secondary;
+      }
+
+      &-icon {
+        display: flex;
+        margin-left: 1rem;
+        transition: $default-transition;
+
+        svg {
+          fill: $color-primary;
+        }
       }
     }
 </style>
