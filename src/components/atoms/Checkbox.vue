@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import checkboxBase from '../../../mixins/checkboxBase';
+import checkboxBase from '../../mixins/checkboxBase';
 
 export default {
   name: 'Checkbox',
