@@ -9,7 +9,7 @@
 </template>
 
 <script>
-// Go on https://antonreshetov.github.io/vue-eva-icons/ to see all availables icons
+// Go on https://antonreshetov.github.io/vue-eva-icons/ to see all available icons
 export default {
   name: 'Icon',
   props: {
