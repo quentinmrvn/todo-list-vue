@@ -1,12 +1,13 @@
 <template>
-  <label :for="checkboxInternalId">
+  <label :for="internalId">
     <slot name="label">
       {{ label }}
     </slot>
     <input
-      :id="checkboxInternalId"
+      :id="internalId"
       type="checkbox"
       v-bind="$attrs"
+      :checked="shouldBeChecked"
       @change.stop="handleChange"
     >
   </label>
@@ -14,10 +15,11 @@
 
 <script>
 import checkboxBase from '../../mixins/checkboxBase';
+import inputBase from '../../mixins/inputBase';
 
 export default {
   name: 'Checkbox',
-  mixins: [checkboxBase],
+  mixins: [checkboxBase, inputBase],
   inheritAttrs: false,
 };
 </script>

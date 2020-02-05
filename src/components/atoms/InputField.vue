@@ -5,7 +5,7 @@
   >
     <label
       v-if="label || $slots.label"
-      :for="internalInputId"
+      :for="internalId"
       class="InputField-label"
     >
       <slot name="label">
@@ -14,7 +14,7 @@
     </label>
 
     <input
-      :id="internalInputId"
+      :id="internalId"
       :type="type"
       :class="cssClasses"
       class="InputField-input"
@@ -27,27 +27,18 @@
 </template>
 
 <script>
+import inputBase from '../../mixins/inputBase';
+
 export default {
   name: 'InputField',
+  mixins: [inputBase],
   inheritAttrs: false,
   props: {
-    label: {
-      type: String,
-      default: '',
-    },
-    value: {
-      type: String,
-      required: true,
-    },
     type: {
       type: String,
       default: 'text',
     },
     cssModifier: {
-      type: String,
-      default: '',
-    },
-    inputId: {
       type: String,
       default: '',
     },
@@ -62,9 +53,6 @@ export default {
       return {
         'InputField-input--focused': this.isFocused,
       };
-    },
-    internalInputId() {
-      return this.inputId === '' ? this.uid : this.inputId;
     },
   },
   methods: {

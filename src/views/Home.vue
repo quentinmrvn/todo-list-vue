@@ -1,20 +1,20 @@
 <template>
   <div class="Home">
     <Checkbox
-      v-model="checkedBox"
-      check-value="toto"
+      v-model="isChecked"
+      value="toto"
       label="toto"
       @change="checkChange"
     />
     <Checkbox
       v-model="checkedBox"
-      check-value="titi"
+      value="titi"
       label="titi"
       @change="checkChange"
     />
     <Checkbox
       v-model="checkedBox"
-      check-value="tutu"
+      value="tutu"
       label="tutu"
       @change="checkChange"
     />
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       checkedBox: [],
+      isChecked: false,
     };
   },
   methods: {

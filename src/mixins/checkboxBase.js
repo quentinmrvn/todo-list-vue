@@ -1,23 +1,44 @@
 export default {
-  model: {},
+  model: {
+    prop: 'modelValue',
+    event: 'change',
+  },
   props: {
-    id: {
-      type: String,
-      default: '',
+    modelValue: {
+      default: false,
     },
-    label: {
-      type: String,
-      default: '',
+    trueValue: {
+      default: true,
+    },
+    falseValue: {
+      default: false,
     },
   },
   methods: {
     handleChange(event) {
-      this.$emit('change', event.target.checked);
+      const isChecked = event.target.checked;
+
+      if (this.modelValue instanceof Array) {
+        const newValue = [...this.modelValue];
+
+        if (isChecked) {
+          newValue.push(this.value);
+        } else {
+          newValue.splice(newValue.indexOf(this.value), 1);
+        }
+
+        this.$emit('change', newValue);
+      } else {
+        this.$emit('change', isChecked ? this.trueValue : this.falseValue);
+      }
     },
   },
   computed: {
-    checkboxInternalId() {
-      return this.id === '' ? this.uid : this.id;
+    shouldBeChecked() {
+      if (this.modelValue instanceof Array) {
+        return this.modelValue.includes(this.value);
+      }
+      return this.modelValue === this.trueValue;
     },
   },
 };

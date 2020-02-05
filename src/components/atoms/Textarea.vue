@@ -5,7 +5,7 @@
   >
     <label
       v-if="label || $slots.label"
-      :for="internalTextareaId"
+      :for="internalId"
       class="Textarea-label"
     >
       <slot name="label">
@@ -14,7 +14,7 @@
     </label>
 
     <textarea
-      :id="internalTextareaId"
+      :id="internalId"
       :class="cssClasses"
       class="Textarea-input"
       v-bind="$attrs"
@@ -26,23 +26,14 @@
 </template>
 
 <script>
+import inputBase from '../../mixins/inputBase';
+
 export default {
   name: 'Textarea',
+  mixins: [inputBase],
   inheritAttrs: false,
   props: {
-    label: {
-      type: String,
-      default: '',
-    },
-    value: {
-      type: String,
-      required: true,
-    },
     cssModifier: {
-      type: String,
-      default: '',
-    },
-    textareaId: {
       type: String,
       default: '',
     },
@@ -57,9 +48,6 @@ export default {
       return {
         'Textarea-input--focused': this.isFocused,
       };
-    },
-    internalTextareaId() {
-      return this.textareaId === '' ? this.uid : this.textareaId;
     },
   },
   methods: {
