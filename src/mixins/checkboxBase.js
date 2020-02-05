@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     handleChange(event) {
-      this.$emit('change', event.target.value);
+      this.$emit('change', event.target.checked);
     },
   },
   computed: {
