@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="taskId"
     class="Task"
     :class="cssClasses"
   >
@@ -12,6 +13,7 @@
     <Checkbox
       v-model="isDone"
       value="done"
+      :name="checkBoxName"
       class="Task-checkbox"
     >
       Done
@@ -26,6 +28,10 @@ export default {
   name: 'Task',
   components: { Checkbox },
   props: {
+    taskId: {
+      type: [String, Number],
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -50,6 +56,9 @@ export default {
         'Task--done': this.isDone,
       };
     },
+    checkBoxName() {
+      return `done${this.taskId}`;
+    },
   },
   created() {
     this.isDone = this.alreadyDone;
@@ -59,8 +68,9 @@ export default {
 
 <style lang="scss">
   .Task {
-    font-family: $font-base;
     padding: 1rem;
+    margin-bottom: 1rem;
+    font-family: $font-base;
     transition: $default-transition;
     background-color: $color-lightred;
     &--done {
