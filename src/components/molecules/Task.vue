@@ -1,67 +1,81 @@
 <template>
   <div
-    :id="taskId"
+    :id="task.id"
     class="Task"
     :class="cssClasses"
   >
     <h2 class="Task-title">
-      {{ title }}
+      {{ task.title }}
     </h2>
-    <p class="Task-description">
-      {{ description }}
+    <p
+      v-if="task.description"
+      class="Task-description"
+    >
+      {{ task.description }}
     </p>
     <Checkbox
-      v-model="isDone"
-      value="done"
+      v-model="state.completed"
+      value="completed"
       :name="checkBoxName"
       class="Task-checkbox"
     >
       Done
     </Checkbox>
+    <Button
+      red
+      class="Task-remove"
+      text="Supprimer la tache"
+      icon-name="trash-outline"
+      @click="handleRemoveTask"
+    />
   </div>
 </template>
 
 <script>
 import Checkbox from '../atoms/Checkbox.vue';
+import Button from '../atoms/Button.vue';
 
 export default {
   name: 'Task',
-  components: { Checkbox },
+  components: { Button, Checkbox },
   props: {
-    taskId: {
-      type: [String, Number],
+    task: {
+      type: Object,
       required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    alreadyDone: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
     return {
-      isDone: false,
+      state: {
+        completed: false,
+      },
     };
   },
   computed: {
     cssClasses() {
       return {
-        'Task--done': this.isDone,
+        'Task--completed': this.state.completed,
       };
     },
     checkBoxName() {
-      return `done${this.taskId}`;
+      return `completed${this.task.id}`;
+    },
+  },
+  watch: {
+    state: {
+      handler(newState) {
+        this.$emit('onStateChange', newState.completed, this.task);
+      },
+      deep: true,
     },
   },
   created() {
-    this.isDone = this.alreadyDone;
+    this.state.completed = this.task.completed;
+  },
+  methods: {
+    handleRemoveTask() {
+      this.$emit('onRemoveTask', this.task);
+    },
   },
 };
 </script>
@@ -73,7 +87,7 @@ export default {
     font-family: $font-base;
     transition: $default-transition;
     background-color: $color-lightred;
-    &--done {
+    &--completed {
       background-color: $color-background;
     }
 
@@ -87,6 +101,10 @@ export default {
       color: $color-primary;
       font-size: 1.6rem;
       margin-bottom: 1rem;
+    }
+
+    &-remove {
+      margin-top: 1rem;
     }
   }
 </style>

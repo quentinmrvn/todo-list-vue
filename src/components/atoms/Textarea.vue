@@ -75,7 +75,7 @@ export default {
     }
     &-input {
       padding: .6rem 1rem;
-      min-height: 14rem;
+      min-height: 7rem;
       font-size: 1.4rem;
       font-family: $font-base;
       color: $color-primary;

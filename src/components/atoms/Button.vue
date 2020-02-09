@@ -1,6 +1,7 @@
 <template>
   <button
     class="Button"
+    :class="cssClasses"
     v-bind="$attrs"
     @click="emitClick"
   >
@@ -32,6 +33,17 @@ export default {
       type: String,
       default: '',
     },
+    red: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    cssClasses() {
+      return {
+        'Button--red': this.red,
+      };
+    },
   },
   methods: {
     emitClick() {
@@ -48,6 +60,7 @@ export default {
       display: flex;
       align-items: center;
       padding: 1rem 2rem;
+      height: fit-content;
       border: none;
       border-radius: .5rem;
       color: $color-primary;
@@ -55,6 +68,16 @@ export default {
       transition: $default-transition;
       font-family: $font-base;
       font-size: 1.4rem;
+
+      &--red {
+        background-color: $color-red;
+        color: white;
+        #{$el}-icon {
+          svg {
+            fill: white;
+          }
+        }
+      }
 
       &:hover {
         cursor: pointer;
