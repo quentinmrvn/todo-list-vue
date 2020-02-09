@@ -90,8 +90,7 @@ export default {
 
       &[disabled] {
         opacity: .5;
-        color: $color-primary;
-        background-color: $color-secondary;
+        pointer-events: none;
       }
 
       &-icon {

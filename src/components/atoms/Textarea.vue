@@ -66,12 +66,13 @@ export default {
 
 <style lang="scss">
   .Textarea {
-    display: flex;
 
     &-label {
       margin-right: 2rem;
       font-size: 1.6rem;
       color: $color-primary;
+      display: block;
+      margin-bottom: 1rem;
     }
     &-input {
       padding: .6rem 1rem;

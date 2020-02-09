@@ -19,7 +19,7 @@
       :name="checkBoxName"
       class="Task-checkbox"
     >
-      Done
+      Terminée
     </Checkbox>
     <Button
       red

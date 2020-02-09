@@ -66,9 +66,10 @@ export default {
 <style lang="scss">
   .TaskForm {
     display: flex;
+    margin-bottom: 2rem;
 
     &-input {
-      margin-right: 1rem;
+      margin-right: 2rem;
     }
   }
 </style>

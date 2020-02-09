@@ -44,6 +44,7 @@ export default {
     position: relative;
     font-size: 1.6rem;
     color: $color-primary;
+    cursor: pointer;
 
     &:before {
       content: '';

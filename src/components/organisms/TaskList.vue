@@ -1,13 +1,22 @@
 <template>
   <div class="TaskList">
-    <Button
-      v-if="isRemoveAllButton"
-      red
-      class="TaskList-removeAll"
-      text="Supprimer toute les taches"
-      icon-name="trash-outline"
-      @click="removeAllTasks"
-    />
+    <div class="TaskList-header">
+      <h2>Liste de taches</h2>
+      <Button
+        class="TaskList-removeAll"
+        :disabled="noTasks"
+        red
+        text="Supprimer toute les taches"
+        icon-name="trash-outline"
+        @click="removeAllTasks"
+      />
+    </div>
+    <p
+      v-if="noTasks"
+      class="TaskList-none"
+    >
+      Il n'y a aucune tache dans votre liste
+    </p>
     <Task
       v-for="task in tasks"
       :key="task.id"
@@ -32,8 +41,8 @@ export default {
     },
   },
   computed: {
-    isRemoveAllButton() {
-      return this.tasks.length > 1;
+    noTasks() {
+      return this.tasks.length === 0;
     },
   },
   methods: {
@@ -54,9 +63,20 @@ export default {
 
 <style lang="scss">
   .TaskList {
-    &-removeAll {
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: $font-base;
+      font-size: 2.5rem;
+      color: $color-primary;
       margin-bottom: 2rem;
-      margin-left: auto;
+    }
+
+    &-none {
+      font-family: $font-base;
+      font-size: 1.6rem;
+      color: $color-primary;
     }
   }
 </style>
