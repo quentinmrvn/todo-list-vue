@@ -3,7 +3,7 @@
     class="Checkbox"
     :for="internalId"
   >
-    <slot name="label">
+    <slot>
       {{ label }}
     </slot>
     <Icon
