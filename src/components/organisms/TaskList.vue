@@ -17,23 +17,11 @@ import Task from '../molecules/Task.vue';
 export default {
   name: 'TaskList',
   components: { Task },
-  data() {
-    return {
-      tasks: [
-        {
-          id: 1,
-          title: 'Task 1',
-          description: 'What you have to do',
-          done: false,
-        },
-        {
-          id: 2,
-          title: 'Task 2',
-          description: 'What you have to do',
-          done: true,
-        },
-      ],
-    };
+  props: {
+    tasks: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>
