@@ -51,11 +51,10 @@ export default {
       this.tasks[taskIndex].completed = completed;
     },
     removeTask(task) {
-      const taskIndex = this.tasks.indexOf(task);
-      this.tasks.splice(taskIndex, 1);
+      this.$emit('update:tasks', this.tasks.filter(t => t !== task));
     },
     removeAllTasks() {
-      this.tasks = [];
+      this.$emit('update:tasks', []);
     },
   },
 };

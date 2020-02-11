@@ -18,6 +18,7 @@
       :type="type"
       :class="cssClasses"
       class="InputField-input"
+      :value="value"
       v-bind="$attrs"
       @input="emitInput"
       @blur="onBlur"

@@ -17,6 +17,7 @@
       :id="internalId"
       :class="cssClasses"
       class="Textarea-input"
+      :value="value"
       v-bind="$attrs"
       @input="emitInput"
       @blur="onBlur"

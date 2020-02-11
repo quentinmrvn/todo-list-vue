@@ -1,7 +1,7 @@
 <template>
   <div class="Home">
     <TaskForm @onAddTask="addTask" />
-    <TaskList :tasks="tasks" />
+    <TaskList :tasks.sync="tasks" />
   </div>
 </template>
 
