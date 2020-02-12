@@ -8,9 +8,12 @@
   />
 </template>
 
-<script>
+<script lang="ts">
 // Go on https://antonreshetov.github.io/vue-eva-icons/ to see all available icons
-export default {
+
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'Icon',
   props: {
     name: {
@@ -36,5 +39,5 @@ export default {
       default: '15',
     },
   },
-};
+});
 </script>

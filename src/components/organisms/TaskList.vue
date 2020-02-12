@@ -27,37 +27,39 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import Task from '../molecules/Task.vue';
 import Button from '../atoms/Button.vue';
+import { Task as TaskInterface } from '../../interfaces/task';
 
-export default {
+export default Vue.extend({
   name: 'TaskList',
   components: { Button, Task },
   props: {
     tasks: {
-      type: Array,
+      type: Array as () => TaskInterface[],
       required: true,
     },
   },
   computed: {
-    noTasks() {
+    noTasks():boolean {
       return this.tasks.length === 0;
     },
   },
   methods: {
-    changeTaskState(completed, task) {
+    changeTaskState(completed:boolean, task:TaskInterface) {
       const taskIndex = this.tasks.indexOf(task);
       this.tasks[taskIndex].completed = completed;
     },
-    removeTask(task) {
+    removeTask(task:TaskInterface) {
       this.$emit('update:tasks', this.tasks.filter(t => t !== task));
     },
     removeAllTasks() {
       this.$emit('update:tasks', []);
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

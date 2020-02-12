@@ -10,10 +10,12 @@
   </header>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'Header',
-};
+});
 </script>
 
 <style lang="scss">

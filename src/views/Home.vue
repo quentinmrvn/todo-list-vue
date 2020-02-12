@@ -5,23 +5,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 
+import { Task as TaskInterface } from '../interfaces/task';
 import TaskForm from '../components/organisms/TaskForm.vue';
 import TaskList from '../components/organisms/TaskList.vue';
 
-export default {
+export default Vue.extend({
   name: 'Home',
   components: { TaskList, TaskForm },
   data() {
     return {
-      tasks: [],
+      tasks: [] as TaskInterface[],
     };
   },
   methods: {
-    addTask(task) {
+    addTask(task:TaskInterface) {
       this.tasks.push(task);
     },
   },
-};
+});
 </script>
