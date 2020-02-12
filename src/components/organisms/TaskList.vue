@@ -29,37 +29,44 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Component from 'vue-class-component';
+
 import Task from '../molecules/Task.vue';
 import Button from '../atoms/Button.vue';
 import { Task as TaskInterface } from '../../interfaces/task';
 
-export default Vue.extend({
-  name: 'TaskList',
-  components: { Button, Task },
+
+const TaskListProps = Vue.extend({
   props: {
     tasks: {
       type: Array as () => TaskInterface[],
       required: true,
     },
   },
-  computed: {
-    noTasks():boolean {
-      return this.tasks.length === 0;
-    },
-  },
-  methods: {
-    changeTaskState(completed:boolean, task:TaskInterface) {
-      const taskIndex = this.tasks.indexOf(task);
-      this.tasks[taskIndex].completed = completed;
-    },
-    removeTask(task:TaskInterface) {
-      this.$emit('update:tasks', this.tasks.filter(t => t !== task));
-    },
-    removeAllTasks() {
-      this.$emit('update:tasks', []);
-    },
-  },
 });
+
+@Component({
+  components: { Button, Task },
+})
+
+export default class TaskList extends TaskListProps {
+  get noTasks(): boolean {
+    return this.tasks.length === 0;
+  }
+
+  changeTaskState(completed: boolean, task: TaskInterface) {
+    const taskIndex = this.tasks.indexOf(task);
+    this.tasks[taskIndex].completed = completed;
+  }
+
+  removeTask(task: TaskInterface) {
+    this.$emit('update:tasks', this.tasks.filter((t:TaskInterface) => t !== task));
+  }
+
+  removeAllTasks() {
+    this.$emit('update:tasks', []);
+  }
+}
 </script>
 
 <style lang="scss">
