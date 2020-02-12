@@ -1,7 +1,6 @@
 <template>
   <label
     class="Checkbox"
-    :for="internalId"
   >
     <slot>
       {{ label }}
@@ -15,7 +14,6 @@
       class="Checkbox-icon"
     />
     <input
-      :id="internalId"
       type="checkbox"
       v-bind="$attrs"
       class="Checkbox-input"
@@ -25,17 +23,17 @@
   </label>
 </template>
 
-<script>
+<script lang="ts">
+import mixins from 'vue-typed-mixins';
 import checkboxBase from '../../mixins/checkboxBase';
 import inputBase from '../../mixins/inputBase';
 import Icon from './Icon.vue';
 
-export default {
+export default mixins(checkboxBase, inputBase).extend({
   name: 'Checkbox',
   components: { Icon },
-  mixins: [checkboxBase, inputBase],
   inheritAttrs: false,
-};
+});
 </script>
 
 <style lang="scss">

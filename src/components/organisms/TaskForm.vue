@@ -26,13 +26,15 @@
   </Form>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
+
 import Form from '../molecules/Form.vue';
 import InputField from '../atoms/InputField.vue';
 import Button from '../atoms/Button.vue';
 import Textarea from '../atoms/Textarea.vue';
 
-export default {
+export default Vue.extend({
   name: 'TaskForm',
   components: {
     Textarea, Button, InputField, Form,
@@ -60,7 +62,7 @@ export default {
       this.form.description = '';
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

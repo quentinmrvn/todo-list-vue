@@ -1,4 +1,6 @@
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
   props: {
     id: {
       type: String,
@@ -13,9 +15,4 @@ export default {
       required: true,
     },
   },
-  computed: {
-    internalId() {
-      return this.id === '' ? this.uid : this.id;
-    },
-  },
-};
+});

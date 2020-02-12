@@ -31,11 +31,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
+
 import Checkbox from '../atoms/Checkbox.vue';
 import Button from '../atoms/Button.vue';
 
-export default {
+export default Vue.extend({
   name: 'Task',
   components: { Button, Checkbox },
   props: {
@@ -52,12 +54,12 @@ export default {
     };
   },
   computed: {
-    cssClasses() {
+    cssClasses():object {
       return {
         'Task--completed': this.state.completed,
       };
     },
-    checkBoxName() {
+    checkBoxName():string {
       return `completed${this.task.id}`;
     },
   },
@@ -77,7 +79,7 @@ export default {
       this.$emit('onRemoveTask', this.task);
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

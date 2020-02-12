@@ -17,10 +17,11 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import Icon from './Icon.vue';
 
-export default {
+export default Vue.extend({
   name: 'Button',
   components: { Icon },
   inheritAttrs: false,
@@ -39,7 +40,7 @@ export default {
     },
   },
   computed: {
-    cssClasses() {
+    cssClasses():object {
       return {
         'Button--red': this.red,
       };
@@ -50,7 +51,7 @@ export default {
       this.$emit('click');
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

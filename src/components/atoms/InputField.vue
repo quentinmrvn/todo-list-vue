@@ -27,12 +27,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+
+import mixins from 'vue-typed-mixins';
 import inputBase from '../../mixins/inputBase';
 
-export default {
+export default mixins(inputBase).extend({
   name: 'InputField',
-  mixins: [inputBase],
   inheritAttrs: false,
   props: {
     type: {
@@ -50,15 +51,15 @@ export default {
     };
   },
   computed: {
-    cssClasses() {
+    cssClasses():object {
       return {
         'InputField-input--focused': this.isFocused,
       };
     },
   },
   methods: {
-    emitInput(event) {
-      this.$emit('input', event.target.value);
+    emitInput(event:Event) {
+      this.$emit('input', (event.target as HTMLInputElement).value);
     },
     onBlur() {
       this.isFocused = false;
@@ -67,7 +68,7 @@ export default {
       this.isFocused = true;
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

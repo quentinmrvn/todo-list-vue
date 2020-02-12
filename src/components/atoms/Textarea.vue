@@ -26,12 +26,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import mixins from 'vue-typed-mixins';
+
 import inputBase from '../../mixins/inputBase';
 
-export default {
+export default mixins(inputBase).extend({
   name: 'Textarea',
-  mixins: [inputBase],
   inheritAttrs: false,
   props: {
     cssModifier: {
@@ -45,15 +46,15 @@ export default {
     };
   },
   computed: {
-    cssClasses() {
+    cssClasses():object {
       return {
         'Textarea-input--focused': this.isFocused,
       };
     },
   },
   methods: {
-    emitInput(event) {
-      this.$emit('input', event.target.value);
+    emitInput(event:Event) {
+      this.$emit('input', (event.target as HTMLTextAreaElement).value);
     },
     onBlur() {
       this.isFocused = false;
@@ -62,7 +63,7 @@ export default {
       this.isFocused = true;
     },
   },
-};
+});
 </script>
 
 <style lang="scss">
