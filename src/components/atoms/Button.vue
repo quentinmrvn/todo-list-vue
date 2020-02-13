@@ -3,7 +3,7 @@
     class="Button"
     :class="cssClasses"
     v-bind="$attrs"
-    @click="emitClick"
+    @click="onClick"
   >
     {{ text }}
 
@@ -19,39 +19,30 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
 import Icon from './Icon.vue';
 
-export default Vue.extend({
-  name: 'Button',
+@Component({
   components: { Icon },
   inheritAttrs: false,
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
-    iconName: {
-      type: String,
-      default: '',
-    },
-    red: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    cssClasses():object {
-      return {
-        'Button--red': this.red,
-      };
-    },
-  },
-  methods: {
-    emitClick() {
-      this.$emit('click');
-    },
-  },
-});
+})
+export default class Button extends Vue {
+  @Prop({ required: true }) text!:string;
+
+  @Prop({ default: '' }) iconName!:string;
+
+  @Prop({ default: false }) red!:boolean;
+
+  get cssClasses():object {
+    return {
+      'Button--red': this.red,
+    };
+  }
+
+  onClick() {
+    this.$emit('click');
+  }
+}
 </script>
 
 <style lang="scss">

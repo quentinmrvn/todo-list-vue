@@ -27,15 +27,17 @@
 
 <script lang="ts">
 import mixins from 'vue-typed-mixins';
+import { Component } from 'vue-property-decorator';
+
 import checkboxBase from '../../mixins/checkboxBase';
 import inputBase from '../../mixins/inputBase';
 import Icon from './Icon.vue';
 
-export default mixins(checkboxBase, inputBase).extend({
-  name: 'Checkbox',
+@Component({
   components: { Icon },
   inheritAttrs: false,
-});
+})
+export default class Checkbox extends mixins(checkboxBase, inputBase) {}
 </script>
 
 <style lang="scss">

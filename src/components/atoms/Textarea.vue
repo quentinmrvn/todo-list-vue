@@ -28,42 +28,35 @@
 
 <script lang="ts">
 import mixins from 'vue-typed-mixins';
-
+import { Component, Prop } from 'vue-property-decorator';
 import inputBase from '../../mixins/inputBase';
 
-export default mixins(inputBase).extend({
-  name: 'Textarea',
+@Component({
   inheritAttrs: false,
-  props: {
-    cssModifier: {
-      type: String,
-      default: '',
-    },
-  },
-  data() {
+})
+export default class Textarea extends mixins(inputBase) {
+  @Prop({ default: '' }) cssModifier!: string;
+
+  isFocused = false;
+
+  get cssClasses():object {
     return {
-      isFocused: false,
+      'Textarea-input--focused': this.isFocused,
     };
-  },
-  computed: {
-    cssClasses():object {
-      return {
-        'Textarea-input--focused': this.isFocused,
-      };
-    },
-  },
-  methods: {
-    emitInput(event:Event) {
-      this.$emit('input', (event.target as HTMLTextAreaElement).value);
-    },
-    onBlur() {
-      this.isFocused = false;
-    },
-    onFocus() {
-      this.isFocused = true;
-    },
-  },
-});
+  }
+
+  emitInput(event:Event) {
+    this.$emit('input', (event.target as HTMLTextAreaElement).value);
+  }
+
+  onBlur() {
+    this.isFocused = false;
+  }
+
+  onFocus() {
+    this.isFocused = true;
+  }
+}
 </script>
 
 <style lang="scss">

@@ -22,7 +22,7 @@
       Terminée
     </Checkbox>
     <Button
-      red
+      :red="true"
       class="Task-remove"
       text="Supprimer la tache"
       icon-name="trash-outline"
@@ -50,10 +50,10 @@ export default class Task extends Vue {
     completed: false,
   };
 
-  @Prop({ required: true }) task: TaskInterface | undefined
+  @Prop({ required: true }) task!: TaskInterface;
 
   created() {
-    this.taskState.completed = this.task?.completed!;
+    this.taskState.completed = this.task.completed!;
   }
 
   get cssClasses():object {
@@ -63,12 +63,12 @@ export default class Task extends Vue {
   }
 
   get checkBoxName():string {
-    return `completed${this.task?.id}`;
+    return `completed${this.task.id}`;
   }
 
   @Emit('onRemoveTask')
   handleRemoveTask():TaskInterface {
-    return this.task!;
+    return this.task;
   }
 
   @Watch('taskState', { deep: true })

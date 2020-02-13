@@ -12,32 +12,20 @@
 // Go on https://antonreshetov.github.io/vue-eva-icons/ to see all available icons
 
 import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
 
-export default Vue.extend({
-  name: 'Icon',
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    animation: {
-      type: String,
-      default: '',
-      // zoom, pulse, shake, flip
-    },
-    color: {
-      type: String,
-      default: '#000',
-      // HEX or color name
-    },
-    height: {
-      type: String,
-      default: '15',
-    },
-    width: {
-      type: String,
-      default: '15',
-    },
-  },
-});
+@Component
+export default class Icon extends Vue {
+  @Prop({ required: true }) name!:string;
+
+  @Prop({ default: '' }) animation!:string;
+
+  // zoom, pulse, shake, flip
+  @Prop({ default: '#000' }) color!:string;
+
+  // HEX or color name
+  @Prop({ default: '15' }) height!:string;
+
+  @Prop({ default: '15' }) width!:string;
+}
 </script>

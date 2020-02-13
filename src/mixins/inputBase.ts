@@ -1,20 +1,15 @@
 import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
 import { uuid } from 'vue-uuid';
 
-export default Vue.extend({
-  props: {
-    label: {
-      type: String,
-      default: '',
-    },
-    value: {
-      type: String,
-      required: true,
-    },
-  },
-  computed: {
-    uid():string {
-      return uuid.v1();
-    },
-  },
-});
+@Component
+export default class inputBase extends Vue {
+  @Prop({ default: '' }) label!:string;
+
+  @Prop({ required: true }) value!:string;
+
+  // eslint-disable-next-line class-methods-use-this
+  get uid():string {
+    return uuid.v1();
+  }
+}

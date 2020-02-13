@@ -28,47 +28,40 @@
 </template>
 
 <script lang="ts">
-
+import { Component, Prop, Emit } from 'vue-property-decorator';
 import mixins from 'vue-typed-mixins';
 import inputBase from '../../mixins/inputBase';
 
-export default mixins(inputBase).extend({
-  name: 'InputField',
+@Component({
   inheritAttrs: false,
-  props: {
-    type: {
-      type: String,
-      default: 'text',
-    },
-    cssModifier: {
-      type: String,
-      default: '',
-    },
-  },
-  data() {
+})
+export default class InputField extends mixins(inputBase) {
+  @Prop({ default: 'text' }) type!: string;
+
+  @Prop({ default: '' }) cssModifier!: string;
+
+  isFocused= false;
+
+  get cssClasses():object {
     return {
-      isFocused: false,
+      'InputField-input--focused': this.isFocused,
     };
-  },
-  computed: {
-    cssClasses():object {
-      return {
-        'InputField-input--focused': this.isFocused,
-      };
-    },
-  },
-  methods: {
-    emitInput(event:Event) {
-      this.$emit('input', (event.target as HTMLInputElement).value);
-    },
-    onBlur() {
-      this.isFocused = false;
-    },
-    onFocus() {
-      this.isFocused = true;
-    },
-  },
-});
+  }
+
+  @Emit('input')
+  // eslint-disable-next-line class-methods-use-this
+  emitInput(event:Event) {
+    return (event.target as HTMLInputElement).value;
+  }
+
+  onBlur() {
+    this.isFocused = false;
+  }
+
+  onFocus() {
+    this.isFocused = true;
+  }
+}
 </script>
 
 <style lang="scss">

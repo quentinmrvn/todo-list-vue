@@ -1,7 +1,7 @@
 <template>
   <form
     class="Form"
-    @submit.prevent="emitSubmitEvent"
+    @submit.prevent="onSubmit"
   >
     <slot />
   </form>
@@ -9,13 +9,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 
-export default Vue.extend({
-  name: 'Form',
-  methods: {
-    emitSubmitEvent() {
-      this.$emit('submit');
-    },
-  },
-});
+@Component
+export default class From extends Vue {
+  onSubmit() {
+    this.$emit('submit');
+  }
+}
 </script>

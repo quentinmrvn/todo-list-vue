@@ -2,7 +2,7 @@
   <Form
     ref="form"
     class="TaskForm"
-    @submit="handleAddTask"
+    @submit="onAddTask"
   >
     <InputField
       ref="input"
@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import { Component, Emit } from 'vue-property-decorator';
 import { uuid } from 'vue-uuid';
 
 import Form from '../molecules/Form.vue';
@@ -48,15 +48,17 @@ export default class TaskForm extends Vue {
     description: '',
   };
 
-  handleAddTask() {
+  @Emit('onAddTask')
+  onAddTask() {
     const task = {
       id: `task${uuid.v1()}`,
       title: this.form.title,
       description: this.form.description,
       completed: false,
     };
-    this.$emit('onAddTask', task);
     this.resetForm();
+
+    return task;
   }
 
   resetForm() {

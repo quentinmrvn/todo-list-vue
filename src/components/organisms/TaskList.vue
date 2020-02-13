@@ -5,7 +5,7 @@
       <Button
         class="TaskList-removeAll"
         :disabled="noTasks"
-        red
+        :red="true"
         text="Supprimer toute les taches"
         icon-name="trash-outline"
         @click="removeAllTasks"
@@ -29,27 +29,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
-
+import { Component, Prop, Emit } from 'vue-property-decorator';
 import Task from '../molecules/Task.vue';
 import Button from '../atoms/Button.vue';
 import { Task as TaskInterface } from '../../interfaces/task';
 
 
-const TaskListProps = Vue.extend({
-  props: {
-    tasks: {
-      type: Array as () => TaskInterface[],
-      required: true,
-    },
-  },
-});
-
 @Component({
   components: { Button, Task },
 })
 
-export default class TaskList extends TaskListProps {
+export default class TaskList extends Vue {
+  @Prop({ required: true }) tasks!: TaskInterface[];
+
   get noTasks(): boolean {
     return this.tasks.length === 0;
   }
@@ -59,12 +51,15 @@ export default class TaskList extends TaskListProps {
     this.tasks[taskIndex].completed = completed;
   }
 
-  removeTask(task: TaskInterface) {
-    this.$emit('update:tasks', this.tasks.filter((t:TaskInterface) => t !== task));
+  @Emit('update:tasks')
+  removeTask(task: TaskInterface):TaskInterface[] {
+    return this.tasks.filter((t:TaskInterface) => t !== task);
   }
 
-  removeAllTasks() {
-    this.$emit('update:tasks', []);
+  @Emit('update:tasks')
+  // eslint-disable-next-line class-methods-use-this
+  removeAllTasks():[] {
+    return [];
   }
 }
 </script>
