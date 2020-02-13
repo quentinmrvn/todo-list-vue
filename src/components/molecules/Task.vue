@@ -33,53 +33,50 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {
+  Component, Prop, Watch, Emit,
+} from 'vue-property-decorator';
 
+import { Task as TaskInterface } from '../../interfaces/task';
 import Checkbox from '../atoms/Checkbox.vue';
 import Button from '../atoms/Button.vue';
 
-export default Vue.extend({
-  name: 'Task',
+@Component({
   components: { Button, Checkbox },
-  props: {
-    task: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      state: {
-        completed: false,
-      },
-    };
-  },
-  computed: {
-    cssClasses():object {
-      return {
-        'Task--completed': this.state.completed,
-      };
-    },
-    checkBoxName():string {
-      return `completed${this.task.id}`;
-    },
-  },
-  watch: {
-    state: {
-      handler(newState) {
-        this.$emit('onStateChange', newState.completed, this.task);
-      },
-      deep: true,
-    },
-  },
+})
+
+export default class Task extends Vue {
+  state = {
+    completed: false,
+  };
+
+  @Prop({ required: true }) task: TaskInterface | undefined
+
   created() {
-    this.state.completed = this.task.completed;
-  },
-  methods: {
-    handleRemoveTask() {
-      this.$emit('onRemoveTask', this.task);
-    },
-  },
-});
+    this.state.completed = this.task?.completed!;
+  }
+
+  get cssClasses():object {
+    return {
+      'Task--completed': this.state.completed,
+    };
+  }
+
+  get checkBoxName():string {
+    return `completed${this.task?.id}`;
+  }
+
+  @Emit('onRemoveTask')
+  handleRemoveTask():TaskInterface {
+    return this.task!;
+  }
+
+  @Watch('state', { deep: true })
+  onStateChange(newState:TaskInterface) {
+    this.$emit('onStateChange', newState.completed, this.task);
+  }
+}
+
 </script>
 
 <style lang="scss">

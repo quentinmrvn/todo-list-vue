@@ -1,6 +1,7 @@
 <template>
   <label
     class="Checkbox"
+    :for="uid"
   >
     <slot>
       {{ label }}
@@ -14,6 +15,7 @@
       class="Checkbox-icon"
     />
     <input
+      :id="uid"
       type="checkbox"
       v-bind="$attrs"
       class="Checkbox-input"

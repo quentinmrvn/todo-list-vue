@@ -5,7 +5,7 @@
   >
     <label
       v-if="label || $slots.label"
-      :for="internalId"
+      :for="uid"
       class="InputField-label"
     >
       <slot name="label">
@@ -14,7 +14,7 @@
     </label>
 
     <input
-      :id="internalId"
+      :id="uid"
       :type="type"
       :class="cssClasses"
       class="InputField-input"

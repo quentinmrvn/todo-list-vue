@@ -28,41 +28,42 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Component from 'vue-class-component';
+import { uuid } from 'vue-uuid';
 
 import Form from '../molecules/Form.vue';
 import InputField from '../atoms/InputField.vue';
 import Button from '../atoms/Button.vue';
 import Textarea from '../atoms/Textarea.vue';
 
-export default Vue.extend({
-  name: 'TaskForm',
+@Component({
   components: {
     Textarea, Button, InputField, Form,
   },
-  data() {
-    return {
-      form: {
-        title: '',
-        description: '',
-      },
+})
+
+export default class TaskForm extends Vue {
+  form = {
+    title: '',
+    description: '',
+  };
+
+  handleAddTask() {
+    const task = {
+      id: `task${uuid.v1()}`,
+      title: this.form.title,
+      description: this.form.description,
+      completed: false,
     };
-  },
-  methods: {
-    handleAddTask() {
-      const task = {
-        title: this.form.title,
-        description: this.form.description,
-        completed: false,
-      };
-      this.$emit('onAddTask', task);
-      this.resetForm();
-    },
-    resetForm() {
-      this.form.title = '';
-      this.form.description = '';
-    },
-  },
-});
+    this.$emit('onAddTask', task);
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.form.title = '';
+    this.form.description = '';
+  }
+}
 </script>
 
 <style lang="scss">

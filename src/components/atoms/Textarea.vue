@@ -5,7 +5,7 @@
   >
     <label
       v-if="label || $slots.label"
-      :for="internalId"
+      :for="uid"
       class="Textarea-label"
     >
       <slot name="label">
@@ -14,7 +14,7 @@
     </label>
 
     <textarea
-      :id="internalId"
+      :id="uid"
       :class="cssClasses"
       class="Textarea-input"
       :value="value"

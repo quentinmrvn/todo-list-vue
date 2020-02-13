@@ -1,11 +1,8 @@
 import Vue from 'vue';
+import { uuid } from 'vue-uuid';
 
 export default Vue.extend({
   props: {
-    id: {
-      type: String,
-      default: '',
-    },
     label: {
       type: String,
       default: '',
@@ -13,6 +10,11 @@ export default Vue.extend({
     value: {
       type: String,
       required: true,
+    },
+  },
+  computed: {
+    uid():string {
+      return uuid.v1();
     },
   },
 });
