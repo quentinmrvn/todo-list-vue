@@ -14,7 +14,7 @@
       {{ task.description }}
     </p>
     <Checkbox
-      v-model="state.completed"
+      v-model="taskState.completed"
       value="completed"
       :name="checkBoxName"
       class="Task-checkbox"
@@ -46,19 +46,19 @@ import Button from '../atoms/Button.vue';
 })
 
 export default class Task extends Vue {
-  state = {
+  taskState = {
     completed: false,
   };
 
   @Prop({ required: true }) task: TaskInterface | undefined
 
   created() {
-    this.state.completed = this.task?.completed!;
+    this.taskState.completed = this.task?.completed!;
   }
 
   get cssClasses():object {
     return {
-      'Task--completed': this.state.completed,
+      'Task--completed': this.taskState.completed,
     };
   }
 
@@ -71,7 +71,7 @@ export default class Task extends Vue {
     return this.task!;
   }
 
-  @Watch('state', { deep: true })
+  @Watch('taskState', { deep: true })
   onStateChange(newState:TaskInterface) {
     this.$emit('onStateChange', newState.completed, this.task);
   }
